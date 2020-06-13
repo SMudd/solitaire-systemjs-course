@@ -1,4 +1,4 @@
-stage 'CI'
+stage 'Con Int from JenkinsFile'
 node {
 
     checkout scm
@@ -13,7 +13,7 @@ node {
     stash name: 'everything', excludes: 'test-results/**', includes: '**'
 }
 
-stage 'Browser Testing'
+stage 'Run Tests in Different Browsers'
 parallel    chrome:{runTests("Chrome")},
             firefox:{runTests("Firefox")},
             phantomjs:{runTests("PhantomJS")}    
@@ -25,7 +25,7 @@ node {
 //FLyweight Executor - Don't tie up HeavyWeight executor
 input 'Deploy to staging?'   
 
-stage name: 'Deploy', concurrency: 1
+stage name: 'Deploy via Docker p:3000', concurrency: 1
 node {
     sh "echo '<h1>${evn.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
     sh 'docker-compose up -d --build'

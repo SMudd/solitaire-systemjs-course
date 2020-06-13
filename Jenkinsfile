@@ -27,8 +27,8 @@ input 'Deploy to staging?'
 
 stage name: 'Deploy via Docker p:3000', concurrency: 1
 node {
-    sh "echo '<h1>${evn.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
-    sh 'docker-compose up -d --build'
+    //sh "echo '<h1>${evn.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
+    //sh 'docker-compose up -d --build'
 
 
 }
